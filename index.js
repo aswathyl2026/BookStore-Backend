@@ -2,7 +2,7 @@ require('dotenv').config()// loading env contebt to process.env
 const express=require('express')
 const cors=require('cors')
 const routes=require("./routes/allRoutes")
-
+require("./config/db")
 //create server
 const server=express()
 //cors
