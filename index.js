@@ -19,6 +19,10 @@ server.listen(PORT,()=>{
     console.log(process.env.PORT);
     
 })
+//application specific midle ware
+server.use((err,req,res,next)=>{
+    res.status(500).json(err.message)
+})
 server.get('/',(req,res)=>{
     res.status(200).send(`<h1>Server started</h1>`)
 })
