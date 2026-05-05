@@ -11,6 +11,8 @@ server.use(cors())
 server.use(express.json())
 //routes
 server.use(routes)
+//handling static file or folder
+server.use('/uploads',express.static('./uploads'))
 //set up port for server
 const PORT=process.env.PORT
 //start server to listren client

@@ -67,12 +67,30 @@ exports.googleLoginController=async(req,res)=>{
     //res.status(201).json("register request")
     
 }
-
+//user edit-------------
 exports.userEditController=async(req,res)=>{
     console.log("inside userEditcontroller");
-    console.log(req.body);
-    res.status(200).json("received user edit request")
+    console.log(req.body)
+    console.log(req.file)
+    console.log(req.payload);
+    console.log(req.params);
+    const {username,password,bio,picture,role}=req.body
+    const encryptPassword=await bcrypt.hash(password,10)
+    const {id}=req.params
+    const{email}=req.payload
+    const updatePicture=req.file?req.file.filename:picture
+   const updateUser=await users.findByIdAndUpdate({_id:id},{
+     username,
+    email,
+    password: encryptPassword,
+    picture: updatePicture,
+    bio,
+    role
+   },{new:true})
+    
+    res.status(200).json(updateUser)
     
 
     
 }
+//admin edit--------------
