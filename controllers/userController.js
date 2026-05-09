@@ -67,9 +67,9 @@ exports.googleLoginController=async(req,res)=>{
     //res.status(201).json("register request")
     
 }
-//user edit-------------
+//user/admin  edit-------------
 exports.userEditController=async(req,res)=>{
-    console.log("inside userEditcontroller");
+    console.log("inside user Admin Editcontroller");
     console.log(req.body)
     console.log(req.file)
     console.log(req.payload);
