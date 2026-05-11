@@ -32,5 +32,11 @@ router.get('/books/:id',authMiddleware,bookController.vieBookController)
 router.put('/books/:id/buy',authMiddleware,bookController.bookPaymentController)
 
 //admin
-router.put('/admin/:id',adminMiddleware, multerMiddleware.single('picture'),userController.userEditController)
+router.put('/profile/:id',adminMiddleware, multerMiddleware.single('picture'),userController.userEditController)
+//get all user
+router.get('/users',adminMiddleware, multerMiddleware.single('picture'),userController.getAllUsersController)
+//getAllbooks
+router.get('/bookList',adminMiddleware,bookController.viewAllBooksController)
+//update status
+router.put('/book/:id',adminMiddleware,bookController.updateBookStatusController)
 module.exports=router

@@ -128,4 +128,23 @@ exports.bookPaymentController=async(req,res)=>{
 console.log(session);
 res.status(200).json({checkoutURL:session.url})
 }
+//get all book
+exports.viewAllBooksController=async(req,res)=>{
+    console.log("viewAllBooksController");
+    const allBooks=await books.find()
+    res.status(200).json(allBooks)
+    
+}
+
+//update status
+exports.updateBookStatusController=async(req,res)=>{
+    console.log("inside updateBookStatusController");
+    
+    const {id}=req.params
+    const bookDetails=await books.findById({_id:id})
+    bookDetails.status="approved"
+    await bookDetails.save()
+    res.status(200).json(bookDetails)
+    
+}
 
