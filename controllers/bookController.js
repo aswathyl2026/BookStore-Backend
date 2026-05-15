@@ -1,5 +1,7 @@
+const { model } = require('mongoose');
 const books = require('../models/bookModel')
 const stripe = require('stripe')(process.env.STRIPE_SK);
+const { GoogleGenerativeAI } = require("@google/generative-ai");
 //add book
 exports.addBookController = async (req, res) => {
     console.log("inside add book controller");
@@ -146,5 +148,22 @@ exports.updateBookStatusController=async(req,res)=>{
     await bookDetails.save()
     res.status(200).json(bookDetails)
     
+}
+
+exports.generateAIBookController=async(req,res)=>{
+    console.log('Inside generateAIBookController ');
+    const genAPI=new GoogleGenerativeAI(process.env.GEMINI_API)
+    const {title}=req.body
+    const model=genAPI.getGenerativeModel({
+        model:"gemini-2.5-flash"
+    })
+    const result=await model.generateContent(`give me a short abstract of ${title} `)
+    console.log(result)
+     const reply=result.response
+    res.status(200).json({
+        success:true,
+        user:title,
+       content:reply.candidates[0].content.parts[0].text
+    })
 }
 

@@ -28,6 +28,9 @@ router.get('/bought-books',authMiddleware,bookController.getUserBoughtBookContro
 router.delete('/books/:id',authMiddleware,bookController.removeUserUploadBookController)
 //view single book details
 router.get('/books/:id',authMiddleware,bookController.vieBookController)
+
+//vbook detail from gemini
+router.post('/book-ai',authMiddleware,bookController.generateAIBookController)
 //payment
 router.put('/books/:id/buy',authMiddleware,bookController.bookPaymentController)
 
